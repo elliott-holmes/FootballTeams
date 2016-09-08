@@ -19,3 +19,8 @@ Here you should be presented with an index giving you some details on how to use
 I have tested the build and run using Apache Tomcat 7 and Eclipse JEE Neon.
 
 Hopefully all should work ok, but if there are any build issues, please let me know via your normal contact channel and i'll get it sorted asap
+##Future Tasks
+I wanted to make this available as soon as possible due to the fact I am heading on holiday (15th - 22nd) and wanted to ensure that you had chance to view the code. 
+Once I am back from Holiday I will be looking to complete the additional tasks :-
+ * Docker Container - This is a new thing for me, but I will work it out 
+ * Security - This is something I have done before, just needed additional time to implement (and get security set up on the server etc.)
