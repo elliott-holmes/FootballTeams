@@ -1,7 +1,6 @@
 package holmes.elliott.sis.tests;
 
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 
 import java.math.BigInteger;
 import java.util.Calendar;

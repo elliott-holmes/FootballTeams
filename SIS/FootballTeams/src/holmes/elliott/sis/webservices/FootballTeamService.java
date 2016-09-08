@@ -28,11 +28,10 @@ public class FootballTeamService {
 	@GET
 	@Produces("application/json")
 	public Response getFootballTeamByName(@PathParam("team") String team){
-		System.out.println("Retrieving football team : " + team);
 		FootballTeamDAO dao = new FootballTeamDAO();
 		FootballTeam footballTeam = dao.getFootballTeamByName(team);
 		if (footballTeam == null){
-			System.out.println("Team by the name of " + team + " could not be found");
+			//No definition of what should happen so return a 404 error 
 			return Response.status(404).build();
 		}
 		String returnString = new Gson().toJson(footballTeam);

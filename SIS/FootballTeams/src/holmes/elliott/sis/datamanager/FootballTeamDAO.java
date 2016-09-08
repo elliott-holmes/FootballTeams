@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.logging.Logger;
 
 import holmes.elliott.sis.datastore.DataStore;
 import holmes.elliott.sis.model.FootballTeam;
@@ -11,7 +12,7 @@ import holmes.elliott.sis.model.FootballTeam;
 public class FootballTeamDAO {
 	
 	private final static String SORT_CAPACITY = "capacity";
-	
+	private final static Logger LOG = Logger.getLogger(FootballTeamDAO.class.getName());
 	
 	/**
 	 * Adds a football team to the data store
@@ -19,11 +20,14 @@ public class FootballTeamDAO {
 	 * @return true of succesful addition
 	 */
 	public boolean addFootballTeam(FootballTeam newTeam){
-		
+		LOG.info("Request to add new football team");
+		LOG.fine(newTeam.getName());
 		DataStore.getInstance().getFootballTeams().put(newTeam.getName(), newTeam);
 		if(getFootballTeamByName(newTeam.getName()) == null){
+		LOG.fine("Failed to add new team to store for reasons unknown");
 			return false;
 		}
+		LOG.fine("Successfully added team to data store");
 		return true;
 	}
 	
@@ -34,7 +38,15 @@ public class FootballTeamDAO {
 	 * @return @FootballTeam
 	 */
 	public FootballTeam getFootballTeamByName(String name){
-		return DataStore.getInstance().getFootballTeams().get(name);
+		LOG.info("Request to find football team : " + name);
+		if (DataStore.getInstance().getFootballTeams().containsKey(name)){
+			LOG.fine("Football team found : " + name);
+			return DataStore.getInstance().getFootballTeams().get(name);	
+		}else{
+			LOG.fine("Unable to find football team : " + name);
+			return null;
+		}
+		
 	}
 	
 	/**
@@ -42,6 +54,7 @@ public class FootballTeamDAO {
 	 * @return @LinkedList<@FootballTeam>
 	 */
 	public LinkedList<FootballTeam> getAllTeams(){
+		LOG.info("Request to get all teams");
 		return new LinkedList<FootballTeam>(DataStore.getInstance().getFootballTeams().values());
 	}
 	
@@ -50,10 +63,15 @@ public class FootballTeamDAO {
 	 * @return @LinkedList<@FootballTeam>
 	 */
 	public List<FootballTeam> getAllTeamsByCapacity(){
+		LOG.info("Request to get teams by capacity");
 		return getAllTeamsSorted(SORT_CAPACITY);
 	}
 	
-	
+	/**
+	 * Sorts the results based on the key by adding a different parameter.
+	 * @param sortKey
+	 * @return
+	 */
 	private List<FootballTeam> getAllTeamsSorted(String sortKey){
 		List<FootballTeam> returnList = getAllTeams();
 				
@@ -74,9 +92,7 @@ public class FootballTeamDAO {
 			};
 			break;
 		}
-		
-		Collections.sort(returnList, ordeComparator);
-		
+		Collections.sort(returnList, ordeComparator);		
 		return returnList;
 	}
 }

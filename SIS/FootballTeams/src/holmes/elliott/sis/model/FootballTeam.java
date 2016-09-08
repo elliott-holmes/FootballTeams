@@ -2,12 +2,11 @@ package holmes.elliott.sis.model;
 
 import java.io.Serializable;
 import java.math.BigInteger;
-import java.util.Calendar;
 import java.util.Date;
 
 import holmes.elliott.sis.interfaces.TeamInterface;
 
-public class FootballTeam implements TeamInterface, Serializable, Comparable<FootballTeam> {
+public class FootballTeam implements TeamInterface, Serializable {
 
 	private static final long serialVersionUID = 2609951496647053136L;
 
@@ -113,14 +112,5 @@ public class FootballTeam implements TeamInterface, Serializable, Comparable<Foo
 	 */
 	public void setDateOfCreation(Date dateOfCreation) {
 		this.dateOfCreation = dateOfCreation;
-	}
-
-	
-	@Override
-	public int compareTo(FootballTeam o) {
-		// TODO Auto-generated method stub
-		return this.getStadiumCapacity().compareTo(o.getStadiumCapacity());
-	}
-
-	
+	}	
 }
